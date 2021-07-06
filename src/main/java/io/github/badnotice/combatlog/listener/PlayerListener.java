@@ -46,9 +46,17 @@ public final class PlayerListener implements Listener {
             ProjectileSource shooter = arrow.getShooter();
 
             if (shooter instanceof Player) {
+
+                Player shooterPlayer = (Player) shooter;
+                Player player = (Player) entity;
+
+                if (shooterPlayer.equals(player)) {
+                    return;
+                }
+
                 CombatTagEvent tagEvent = new CombatTagEvent(
-                        (Player) shooter,
-                        (Player) entity
+                        shooterPlayer,
+                        player
                 );
 
                 tagEvent.call();
