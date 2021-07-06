@@ -1,0 +1,7 @@
+name: combat-log
+version: 1.0.1-SNAPSHOT
+main: io.github.badnotice.combatlog.CombatLogPlugin
+authors: [ BADnotice ]
+softdepend:
+  - Factions
+  - SimpleClans
