@@ -71,7 +71,7 @@ public final class CombatListener implements Listener {
             return;
         }
 
-        long toMillis = TimeUnit.SECONDS.toMillis(ConfigValue.get(ConfigValue::expireTime));
+        long toMillis = TimeUnit.SECONDS.toMillis(ConfigValue.get(ConfigValue::expireTime) + 1);
         combatManager.insertCombat(Combat.builder()
                 .player(player1.getName())
                 .enemy(player2.getName())

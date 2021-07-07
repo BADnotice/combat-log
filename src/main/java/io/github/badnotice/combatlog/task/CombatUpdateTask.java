@@ -28,7 +28,6 @@ public final class CombatUpdateTask implements Runnable {
 
             if (!combat.expireAt()) {
 
-                combatManager.removeCombat(combat);
                 Player target = Bukkit.getPlayer(combat.getEnemy());
 
                 if (player != null) {
@@ -51,6 +50,8 @@ public final class CombatUpdateTask implements Runnable {
             if (player != null) {
                 player.sendMessage(ConfigValue.get(ConfigValue::messageExpired));
             }
+
+            combatManager.removeCombat(combat);
         });
     }
 
