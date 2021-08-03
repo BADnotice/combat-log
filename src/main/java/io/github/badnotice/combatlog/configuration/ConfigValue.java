@@ -26,27 +26,27 @@ public final class ConfigValue implements ConfigurationInjectable {
     // punish
 
     @ConfigField("punish.enable") private boolean punishEnable;
-    @ConfigField("punish.message") private String punishMessage;
 
     // commands-block
 
-    @ConfigField("command.enable") private boolean commandEnable;
-    @ConfigField("command.commands") private List<String> commandCommands;
-    @ConfigField("command.message") private String commandMessage;
-    @ConfigField("command.restriction") private String commandRestriction;
+    @ConfigField("command.enable")
+    private boolean commandEnable;
+    @ConfigField("command.commands")
+    private List<String> commandCommands;
+    @ConfigField("command.restriction")
+    private String commandRestriction;
 
     // commands-block
 
-    @ConfigField("worlds-block.enable") private boolean worldsBlockEnable;
-    @ConfigField("worlds-block.list") private List<String> worldsBlockList;
+    @ConfigField("worlds-block.enable")
+    private boolean worldsBlockEnable;
+    @ConfigField("worlds-block.list")
+    private List<String> worldsBlockList;
 
-    // messages
-
-    @ConfigField("messages.dead-enemy") private String messageDeadEnemy;
-    @ConfigField("messages.expired") private String messageExpired;
-    @ConfigField("messages.in-combat") private String messageInCombat;
-    @ConfigField("messages.usage-enderpearl") private String messageUsageEnderpearl;
-    @ConfigField("messages.teleport") private String messageTeleport;
+    @ConfigField("pvp-timer.plot-world")
+    private String pvpTimerPlotWorld;
+    @ConfigField("pvp-timer.enable")
+    private boolean pvpTimerEnable;
 
     public static <T> T get(Function<ConfigValue, T> function) {
         return function.apply(instance);

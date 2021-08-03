@@ -3,10 +3,12 @@ package io.github.badnotice.combatlog.listener;
 import io.github.badnotice.combatlog.CombatLogPlugin;
 import io.github.badnotice.combatlog.api.CombatLogAPI;
 import io.github.badnotice.combatlog.configuration.ConfigValue;
+import io.github.badnotice.combatlog.configuration.LangValue;
 import io.github.badnotice.combatlog.enums.RestrictionType;
 import io.github.badnotice.combatlog.event.impl.CombatPunishEvent;
 import io.github.badnotice.combatlog.event.impl.CombatTagEvent;
 import io.github.badnotice.combatlog.manager.CombatManager;
+import io.github.badnotice.combatlog.manager.PVPTimerManager;
 import io.github.badnotice.combatlog.model.Combat;
 import lombok.AllArgsConstructor;
 import org.bukkit.Material;
@@ -40,6 +42,23 @@ public final class PlayerListener implements Listener {
         }
 
         Entity damager = event.getDamager();
+        PVPTimerManager pvpTimerManager = this.plugin.getPvpTimerManager();
+
+        String entityWorldName = entity.getWorld().getName();
+        String worldPlotName = pvpTimerManager.getPlotWorld().getName();
+
+        if (ConfigValue.get(ConfigValue::pvpTimerEnable) && worldPlotName.equals(entityWorldName)) {
+            if (pvpTimerManager.isDay()) {
+                event.setCancelled(true);
+
+                for (String message : LangValue.get(LangValue::pvpTimerNoCombat)) {
+                    damager.sendMessage(message);
+                }
+
+                return;
+            }
+        }
+
         if (event.getCause().equals(EntityDamageEvent.DamageCause.PROJECTILE) && event.getDamager() instanceof Arrow) {
 
             Arrow arrow = (Arrow) damager;
@@ -72,7 +91,6 @@ public final class PlayerListener implements Listener {
 
             tagEvent.call();
         }
-
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
@@ -87,7 +105,7 @@ public final class PlayerListener implements Listener {
         if (combat == null) return;
 
         combatManager.removeCombat(combat);
-        if (killer != null) killer.sendMessage(ConfigValue.get(ConfigValue::messageDeadEnemy)
+        if (killer != null) killer.sendMessage(LangValue.get(LangValue::combatTimerEnemyDeath)
                 .replace("{newline}", "\n")
                 .replace("{enemy}", entity.getName())
         );
@@ -113,7 +131,7 @@ public final class PlayerListener implements Listener {
             case BLACKLIST:
                 if (ConfigValue.get(ConfigValue::commandCommands).contains(command)) {
                     event.setCancelled(true);
-                    player.sendMessage(ConfigValue.get(ConfigValue::commandMessage)
+                    player.sendMessage(LangValue.get(LangValue::commandBlock)
                             .replace("{newline}", "\n")
                     );
                 }
@@ -122,7 +140,7 @@ public final class PlayerListener implements Listener {
             case WHITELIST:
                 if (!ConfigValue.get(ConfigValue::commandCommands).contains(command)) {
                     event.setCancelled(true);
-                    player.sendMessage(ConfigValue.get(ConfigValue::commandMessage)
+                    player.sendMessage(LangValue.get(LangValue::commandBlock)
                             .replace("{newline}", "\n")
                     );
                 }
@@ -154,7 +172,7 @@ public final class PlayerListener implements Listener {
 
             if (item != null && item.getType() == Material.ENDER_PEARL && CombatLogAPI.getInstance().isInCombat(player.getName())) {
                 event.setCancelled(true);
-                player.sendMessage(ConfigValue.get(ConfigValue::messageUsageEnderpearl));
+                player.sendMessage(LangValue.get(LangValue::teleportationBlockPearl));
             }
         }
     }
@@ -163,10 +181,13 @@ public final class PlayerListener implements Listener {
     public void onPlayerTeleport(PlayerTeleportEvent event) {
         Player player = event.getPlayer();
 
-        if (CombatLogAPI.getInstance().isInCombat(player.getName())) {
-            event.setCancelled(CombatLogAPI.getInstance().isInCombat(player.getName()));
-            player.sendMessage(ConfigValue.get(ConfigValue::messageTeleport));
+        Combat combat = this.plugin.getCombatManager().findCombat(player.getName()).orElse(null);
+        if (combat == null) {
+            return;
         }
+
+        event.setCancelled(CombatLogAPI.getInstance().isInCombat(player.getName()));
+        player.sendMessage(LangValue.get(LangValue::teleportationBlockOther));
     }
 
 }

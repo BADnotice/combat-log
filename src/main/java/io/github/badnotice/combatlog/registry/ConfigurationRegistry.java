@@ -2,6 +2,7 @@ package io.github.badnotice.combatlog.registry;
 
 import com.henryfabio.minecraft.configinjector.bukkit.injector.BukkitConfigurationInjector;
 import io.github.badnotice.combatlog.configuration.ConfigValue;
+import io.github.badnotice.combatlog.configuration.LangValue;
 import lombok.Data;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -15,11 +16,13 @@ public final class ConfigurationRegistry {
 
         configurationInjector.saveDefaultConfiguration(
                 plugin,
-                "config.yml"
+                "config.yml",
+                "lang.yml"
         );
 
         configurationInjector.injectConfiguration(
-                ConfigValue.instance
+                ConfigValue.instance,
+                LangValue.instance
         );
 
     }

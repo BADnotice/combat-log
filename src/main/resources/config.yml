@@ -7,48 +7,10 @@ staff-bypass:
   # Permissão necessaria para ignorar o combate
   permission: "combatlog.bypass"
 
-messages:
-
-  # mensagem em resposta ao inimigo ser morto
-
-  # opções:
-  # {newline} - pula uma linha.
-  # {enemy} - nome do inimigo morto.
-  dead-enemy: "&aSeu inimigo foi eliminado!"
-
-  # mensagem em resposta ao sair do combate
-  #
-  # opções:
-  # {newline} - pula uma linha.
-  expired: "&aVocê saiu de combate!"
-
-  # mensagem em resposta ao está combate
-  #
-  # opções:
-  # {newline} - pula uma linha.
-  # {enemy} - nome do inimigo em combate.
-  # {left_time} - tempo par sair de combate.
-  # {prefix} - grupo do inimigo em combate.
-  # {faction_tag} - tag da facção do inimigo
-  # {clan_tag} - tag do clan do inimigo
-  in-combat: "&{left_time} segundos para sair do combate com {prefix} {enemy} {faction_tag} {clan_tag}"
-
-  # mensagem em resposta ao tentar usar enderpearl em combate
-  usage-enderpearl: "&cVocê não pode usar enderpearl em combate."
-
-  # mensagem em resposta ao tentar se teleportar em combate
-  teleport: "&cVocê não pode se teleportar em combate"
-
 # Sistema simples de punição caso o jogador deslogue em combate essa função será chamada
 punish:
   # Caso esteja true o jogador morrerá ao deslogar em combate
   enable: true
-  # Essa mensagem será enviada para todos jogadores online
-  #
-  # Opções de replace:
-  # $newline - pula uma linha.
-  # 7$player - nome do inimigo morto.
-  message: "&7$player &cdesconectou em combate! que feio."
 
 # Lista de comandos que será bloqueado
 command:
@@ -57,7 +19,6 @@ command:
   # WHITELIST - comandos são liberados em combate
   # BLACKLIST - comandos são bloqueados em combate
   restriction: BLACKLIST
-  message: "&cVocê não pode usar esse comando em combate!"
   commands:
     - '/spawn'
 
@@ -66,3 +27,7 @@ worlds-block:
   enable: false
   list:
     - 'world'
+
+pvp-timer:
+  enable: false
+  plot-world: "plot"

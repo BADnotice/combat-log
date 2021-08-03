@@ -1,7 +1,7 @@
 package io.github.badnotice.combatlog.task;
 
 import io.github.badnotice.combatlog.CombatLogPlugin;
-import io.github.badnotice.combatlog.configuration.ConfigValue;
+import io.github.badnotice.combatlog.configuration.LangValue;
 import io.github.badnotice.combatlog.event.impl.CombatUnTagEvent;
 import io.github.badnotice.combatlog.manager.CombatManager;
 import io.github.badnotice.combatlog.util.Actionbar;
@@ -31,7 +31,7 @@ public final class CombatUpdateTask implements Runnable {
                 Player target = Bukkit.getPlayer(combat.getEnemy());
 
                 if (player != null) {
-                    String message = StringUtils.fixEspaces(ConfigValue.get(ConfigValue::messageInCombat)
+                    String message = StringUtils.fixEspaces(LangValue.get(LangValue::inCombat)
                             .replace("{left_time}", String.valueOf(combat.getLeftTime()))
                             .replace("{enemy}", combat.getEnemy())
                             .replace("{faction_tag}", target == null ? "" : this.plugin.getFactionsHook().getTag(target))
@@ -48,7 +48,7 @@ public final class CombatUpdateTask implements Runnable {
             unTagEvent.call();
 
             if (player != null) {
-                player.sendMessage(ConfigValue.get(ConfigValue::messageExpired));
+                player.sendMessage(LangValue.get(LangValue::combatTimerExpire));
             }
 
             combatManager.removeCombat(combat);

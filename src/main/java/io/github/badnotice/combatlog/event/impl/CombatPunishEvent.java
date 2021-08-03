@@ -1,6 +1,6 @@
 package io.github.badnotice.combatlog.event.impl;
 
-import io.github.badnotice.combatlog.configuration.ConfigValue;
+import io.github.badnotice.combatlog.configuration.LangValue;
 import io.github.badnotice.combatlog.event.EventWrapper;
 import io.github.badnotice.combatlog.model.Combat;
 import lombok.Getter;
@@ -19,7 +19,7 @@ public final class CombatPunishEvent extends EventWrapper implements Cancellable
 
     private final Player player;
     private final Combat combat;
-    private String message = ConfigValue.get(ConfigValue::punishMessage);
+    private String message = LangValue.get(LangValue::punish);
 
     private boolean cancelled;
 

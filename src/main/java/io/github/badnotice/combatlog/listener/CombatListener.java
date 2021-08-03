@@ -53,8 +53,8 @@ public final class CombatListener implements Listener {
 
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
             onlinePlayer.sendMessage(event.getMessage()
-                    .replace("$player", player.getName())
-                    .replace("$newline", "\n")
+                    .replace("{player}", player.getName())
+                    .replace("{newline}", "\n")
             );
         }
 

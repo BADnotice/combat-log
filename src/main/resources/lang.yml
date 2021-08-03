@@ -1,0 +1,33 @@
+pvp-timer:
+  activated:
+    - ''
+    - '&6&lPVP TIMER'
+    - ''
+    - '&fOpa, A noite chegou ne? O combate no mundo de terrenos foi ativado'
+    - ''
+  disabled:
+    - ''
+    - '&6&lPVP TIMER'
+    - ''
+    - '&fOpa, O amanheceu ne? O combate no mundo de terrenos foi desativado'
+    - ''
+  no-combat:
+    - ''
+    - '&6&lPVP TIMER'
+    - ''
+    - '&cAinda está de manhã, combate está desativado.'
+
+teleportation:
+  block-pearl: "&cVocê não pode usar enderpearl em combate."
+  block-other: "&cVocê não pode se teleportar em combate"
+
+command:
+  block: "&cVocê não pode usar esse comando em combate!"
+
+combat-timer:
+  expire: "&aVocê saiu de combate!"
+  enemy-death: "&aSeu inimigo foi eliminado!"
+
+punish: "&7$player &cdesconectou em combate! que feio."
+
+in-combat: "&{left_time} segundos para sair do combate com {prefix} {enemy} {faction_tag} {clan_tag}"
