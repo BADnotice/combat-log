@@ -19,14 +19,14 @@ public final class PVPTimerUpdateTask implements Runnable {
 
         if (worldTime < 13000 && !pvpTimerManager.isDay()) {
             pvpTimerManager.setDay(true);
-            Bukkit.getLogger().info("é DIA CAMBADA");
+
             sendMessage(LangValue.get(LangValue::pvpTimerDisabled));
             return;
         }
 
         if (worldTime > 13000 && pvpTimerManager.isDay()) {
             pvpTimerManager.setDay(false);
-            Bukkit.getLogger().info("é NOITE CAMBADA");
+
             sendMessage(LangValue.get(LangValue::pvpTimerActivated));
         }
     }

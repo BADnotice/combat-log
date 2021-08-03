@@ -40,7 +40,8 @@ dependencies {
 
 shadowJar {
     archiveName "${project.name}.jar"
-    getDestinationDirectory().set(file("$rootDir/build/libs"))
+    mergeServiceFiles()
+  //  getDestinationDirectory().set(file("$rootDir/build/libs"))
 
     relocate 'com.github.HenryFabio.configuration-injector', 'io.github.badnotice.combatlog.libs.configuration-injector'
     relocate 'org.bstats', 'io.github.badnotice.combatlog.libs.bstats'
