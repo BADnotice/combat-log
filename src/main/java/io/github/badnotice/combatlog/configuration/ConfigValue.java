@@ -19,13 +19,16 @@ public final class ConfigValue implements ConfigurationInjectable {
 
     public static ConfigValue instance = new ConfigValue();
 
-    @ConfigField("staff-bypass") private ConfigurationSection staffBypass;
+    @ConfigField("staff-bypass")
+    private ConfigurationSection staffBypass;
 
-    @ConfigField("expire-time") private int expireTime;
+    @ConfigField("expire-time")
+    private int expireTime;
 
     // punish
 
-    @ConfigField("punish.enable") private boolean punishEnable;
+    @ConfigField("punish.enable")
+    private boolean punishEnable;
 
     // commands-block
 

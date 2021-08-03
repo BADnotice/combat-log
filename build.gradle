@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'io.github.badnotice'
-version = '1.0.1-SNAPSHOT'
+version = '1.0.2-SNAPSHOT'
 
 tasks.build.dependsOn 'shadowJar'
 
@@ -39,7 +39,9 @@ dependencies {
 }
 
 shadowJar {
-    archiveName "${project.name}-${project.version}.jar"
+    archiveName "${project.name}.jar"
+    getDestinationDirectory().set(file("$rootDir/build/libs"))
+
     relocate 'com.github.HenryFabio.configuration-injector', 'io.github.badnotice.combatlog.libs.configuration-injector'
     relocate 'org.bstats', 'io.github.badnotice.combatlog.libs.bstats'
 }

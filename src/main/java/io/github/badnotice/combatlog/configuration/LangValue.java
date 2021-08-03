@@ -45,6 +45,12 @@ public final class LangValue implements ConfigurationInjectable {
     @ConfigField("teleportation.block-other")
     private String teleportationBlockOther;
 
+    // error
+    @ConfigField("error.no-permission")
+    private String errorNoPermission;
+    @ConfigField("error.help-command")
+    private List<String> errorHelpCommand;
+
     @ConfigField("in-combat")
     private String inCombat;
     @ConfigField("punish")

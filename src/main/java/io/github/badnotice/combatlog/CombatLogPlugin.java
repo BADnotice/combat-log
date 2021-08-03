@@ -1,5 +1,6 @@
 package io.github.badnotice.combatlog;
 
+import io.github.badnotice.combatlog.command.CombatLogCommand;
 import io.github.badnotice.combatlog.configuration.ConfigValue;
 import io.github.badnotice.combatlog.hook.ChatHook;
 import io.github.badnotice.combatlog.hook.FactionsHook;
@@ -67,9 +68,11 @@ public final class CombatLogPlugin extends JavaPlugin {
                     this,
                     new PVPTimerUpdateTask(pvpTimerManager),
                     0,
-                    200L
+                    20
             );
         }
+
+        getCommand("combatlog").setExecutor(new CombatLogCommand(this));
 
         int pluginId = 11906;
         Metrics metrics = new Metrics(this, pluginId);
