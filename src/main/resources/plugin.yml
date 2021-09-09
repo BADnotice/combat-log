@@ -1,5 +1,5 @@
 name: combat-log
-version: 1.0.2-SNAPSHOT
+version: 1.0.3-SNAPSHOT
 main: io.github.badnotice.combatlog.CombatLogPlugin
 authors: [ BADnotice ]
 softdepend:
