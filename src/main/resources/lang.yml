@@ -34,9 +34,9 @@ command:
   block: "&cVocê não pode usar esse comando em combate!"
 
 combat-timer:
-  expire: "&aVocê saiu de combate!"
+  expire: "&aVocê não está mais em combate caso queria, pode deslogar sem perigo."
   enemy-death: "&aSeu inimigo foi eliminado!"
 
-punish: "&7$player &cdesconectou em combate! que feio."
+punish: "&7{player} &cdesconectou em combate! que feio."
 
-in-combat: "&{left_time} segundos para sair do combate com {prefix} {enemy} {faction_tag} {clan_tag}"
+in-combat: "&c{left_time} segundos para sair do combate com {prefix} {enemy} {faction_tag} {clan_tag}"

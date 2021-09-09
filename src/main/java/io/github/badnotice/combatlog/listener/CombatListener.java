@@ -78,6 +78,9 @@ public final class CombatListener implements Listener {
                 .instant(Instant.now().plusMillis(toMillis))
                 .build());
 
+        player1.setFlying(false);
+        player2.setFlying(false);
+
         player1.setAllowFlight(false);
         player2.setAllowFlight(false);
     }

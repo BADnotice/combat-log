@@ -25,7 +25,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 
@@ -42,23 +41,25 @@ public final class PlayerListener implements Listener {
         }
 
         Entity damager = event.getDamager();
-        PVPTimerManager pvpTimerManager = this.plugin.getPvpTimerManager();
+        if (ConfigValue.get(ConfigValue::pvpTimerEnable)) {
+            PVPTimerManager pvpTimerManager = this.plugin.getPvpTimerManager();
 
-        String entityWorldName = entity.getWorld().getName();
-        String worldPlotName = pvpTimerManager.getPlotWorld().getName();
+            String entityWorldName = entity.getWorld().getName();
+            String worldPlotName = pvpTimerManager.getPlotWorld().getName();
 
-        if (ConfigValue.get(ConfigValue::pvpTimerEnable) && worldPlotName.equals(entityWorldName)) {
-            if (pvpTimerManager.isDay()) {
-                event.setCancelled(true);
+            if (worldPlotName.equals(entityWorldName)) {
+                if (pvpTimerManager.isDay()) {
+                    event.setCancelled(true);
 
-                for (String message : LangValue.get(LangValue::pvpTimerNoCombat)) {
-                    damager.sendMessage(message);
+                    for (String message : LangValue.get(LangValue::pvpTimerNoCombat)) {
+                        damager.sendMessage(message);
+                    }
+
+                    return;
                 }
-
-                return;
             }
-        }
 
+        }
         if (event.getCause().equals(EntityDamageEvent.DamageCause.PROJECTILE) && event.getDamager() instanceof Arrow) {
 
             Arrow arrow = (Arrow) damager;
@@ -175,19 +176,6 @@ public final class PlayerListener implements Listener {
                 player.sendMessage(LangValue.get(LangValue::teleportationBlockPearl));
             }
         }
-    }
-
-    @EventHandler(priority = EventPriority.HIGHEST)
-    public void onPlayerTeleport(PlayerTeleportEvent event) {
-        Player player = event.getPlayer();
-
-        Combat combat = this.plugin.getCombatManager().findCombat(player.getName()).orElse(null);
-        if (combat == null) {
-            return;
-        }
-
-        event.setCancelled(CombatLogAPI.getInstance().isInCombat(player.getName()));
-        player.sendMessage(LangValue.get(LangValue::teleportationBlockOther));
     }
 
 }

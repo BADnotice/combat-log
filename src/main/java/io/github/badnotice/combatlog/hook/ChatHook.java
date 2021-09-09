@@ -23,4 +23,8 @@ public final class ChatHook {
         return ChatColor.translateAlternateColorCodes('&', chat.getPlayerPrefix(player));
     }
 
+    public String getSuffix(Player player) {
+        return ChatColor.translateAlternateColorCodes('&', chat.getPlayerSuffix(player));
+    }
+
 }

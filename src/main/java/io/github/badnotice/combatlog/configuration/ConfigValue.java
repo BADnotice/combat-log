@@ -51,6 +51,11 @@ public final class ConfigValue implements ConfigurationInjectable {
     @ConfigField("pvp-timer.enable")
     private boolean pvpTimerEnable;
 
+    @ConfigField("teleportion.allowed-teleport-cause-list")
+    private List<String> teleportionAllowdTelportCauseList;
+    @ConfigField("teleportion.enable")
+    private boolean teleportionEnable;
+
     public static <T> T get(Function<ConfigValue, T> function) {
         return function.apply(instance);
     }

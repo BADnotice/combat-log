@@ -33,8 +33,10 @@ public final class PVPTimerUpdateTask implements Runnable {
 
     private void sendMessage(List<String> messages) {
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
-            for (String message : messages) {
-                onlinePlayer.sendMessage(message);
+            if (onlinePlayer.getWorld().getName().equalsIgnoreCase(this.pvpTimerManager.getPlotWorld().getName())) {
+                for (String message : messages) {
+                    onlinePlayer.sendMessage(message);
+                }
             }
         }
     }

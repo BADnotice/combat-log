@@ -7,6 +7,7 @@ import io.github.badnotice.combatlog.hook.FactionsHook;
 import io.github.badnotice.combatlog.hook.SimpleClanHook;
 import io.github.badnotice.combatlog.listener.CombatListener;
 import io.github.badnotice.combatlog.listener.PlayerListener;
+import io.github.badnotice.combatlog.listener.PlayerTeleportListener;
 import io.github.badnotice.combatlog.manager.CombatManager;
 import io.github.badnotice.combatlog.manager.PVPTimerManager;
 import io.github.badnotice.combatlog.registry.ConfigurationRegistry;
@@ -49,7 +50,8 @@ public final class CombatLogPlugin extends JavaPlugin {
 
         this.registerListeners(
                 new PlayerListener(this),
-                new CombatListener(this)
+                new CombatListener(this),
+                new PlayerTeleportListener(this)
         );
 
         this.getServer().getScheduler().runTaskTimerAsynchronously(
@@ -62,14 +64,18 @@ public final class CombatLogPlugin extends JavaPlugin {
         pvpTimerManager = new PVPTimerManager();
 
         if (ConfigValue.get(ConfigValue::pvpTimerEnable)) {
-            pvpTimerManager.init();
-
-            this.getServer().getScheduler().runTaskTimerAsynchronously(
+            this.getServer().getScheduler().runTaskLater(
                     this,
-                    new PVPTimerUpdateTask(pvpTimerManager),
-                    0,
-                    20
-            );
+                    () -> {
+                        pvpTimerManager.init();
+
+                        this.getServer().getScheduler().runTaskTimerAsynchronously(
+                                this,
+                                new PVPTimerUpdateTask(pvpTimerManager),
+                                0,
+                                20
+                        );
+                    }, 20 * 5);
         }
 
         getCommand("combatlog").setExecutor(new CombatLogCommand(this));

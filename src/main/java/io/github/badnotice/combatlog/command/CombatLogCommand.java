@@ -24,6 +24,8 @@ public final class CombatLogCommand implements CommandExecutor {
             for (String message : LangValue.get(LangValue::errorHelpCommand)) {
                 sender.sendMessage(message);
             }
+
+            return true;
         }
 
         if (args[0].equalsIgnoreCase("reload")) {

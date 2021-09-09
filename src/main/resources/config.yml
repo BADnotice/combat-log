@@ -1,5 +1,5 @@
 # Tempo para expirar o combate (em segundos)
-expire-time: 20
+expire-time: 15
 
 # Caso queira que staffs não entrem em combate deixe a opção abaixo em true
 staff-bypass:
@@ -31,3 +31,9 @@ worlds-block:
 pvp-timer:
   enable: false
   plot-world: "plot"
+
+teleportion:
+  enable: true
+  allowed-teleport-cause-list:
+    - 'PLUGIN'
+    - 'UNKNOWN'
